@@ -1,3 +1,79 @@
-h1 {
-    color:red
+body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    user-select: none; 
+    box-sizing: border-box;
+
+}
+
+.tela_login {
+    position: absolute;
+    left: 0;
+    top: 0 ;
+    box-sizing: border-box;
+    width: 400px;
+    height: 120px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.informacao{
+    display: flex;
+    position: relative;
+    margin-bottom: 5px;
+}
+.informacao .nome{
+    text-align: left;
+    flex: 1;
+    font-weight: bold;
+}
+
+.informacao .valor{
+    flex: 1;
+}
+.botao_logar{
+    width: 60%;
+    
+}
+
+.tela_login form {
+    text-align: center;
+}
+.tela_usuarios{
+
+    position: absolute;
+    left: 0;
+    top: 120px;
+    box-sizing: border-box;
+    width: 400px;
+    bottom: 0;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.tela_mensagem{
+
+    position: absolute;
+    left: 400px;
+    right: 0 ;
+    box-sizing: border-box;
+    right: 0px;
+    height: 120px;
+    padding: 10px;
+    border: 1px solid black;
+
+}
+
+.tela_chat{
+
+    position: absolute;
+    left: 400px;
+    top: 120px;
+    box-sizing: border-box;
+    right: 0px;
+    bottom: 0px;
+    padding: 10px;
+    border: 1px solid black;
+
 }
