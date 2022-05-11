@@ -7,11 +7,28 @@
         $_SESSION['nome']           ='';
         $_SESSION['cor_nome_texto'] = '#000';
         $_SESSION['cor_nome_fundo'] ='#fff';
+        $_SESSION['msg']            ='';
         
     }
 
     if (isset($_POST['acao'])){
-        
+        switch ($_POST['acao']){
+            case "logar":
+                $_SESSION['logado']  = true;
+                $_SESSION['usuario'] = $_POST['usuario'];
+                $_SESSION['nome']    = '';
+                $_SESSION['msg']     =' Logado com Sucesso! ';
+                break;
+            case "deslogar":
+                $_SESSION['logado']  = false;
+                $_SESSION['usuario'] = '';
+                $_SESSION['nome']    = '';
+                $_SESSION['msg']     =' DesLogado com Sucesso! ';
+                break;
+
+        }
+        Header('Location: .');
+
     }
 
 ?>
@@ -22,15 +39,22 @@
 
 
     <HEAD>
-        <title>Chat IESB</title>
+        <title>Chat IESB </title>
         <script src="script_head.js"></script>
         <link rel="StyleSheet" href="estilo.css"/>
         <link rel="stylesheet" href="tema_<?=$_SESSION['tema']?>.css"/>
+        <?php 
+                if ($_SESSION['msg'] != ''){
+        ?>
+            <script> alert('<?=$_SESSION['msg'];?>');</script>
+        <?php
+           
+       } 
+       ?>
+       
     </HEAD>
 
-
-
-    <body>
+    <body>   
        
 
         <div class="tela_login">
@@ -38,8 +62,8 @@
 
                 if ($_SESSION['logado']){
 
-            ?>
-                    <div class="logado">
+                    ?>
+                    
                         <span class="informacao">
 
                             <span class="nome">Logado como:</span>
@@ -48,7 +72,7 @@
                         </span>
                         <span class="informacao">
 
-                            Seja Bem-vindo <span class="valor"><?=$_SESSION['nome']?></span>!
+                            Seja Bem-vindo! <span class="valor"><?=$_SESSION['nome']?></span>
 
                             
 
@@ -59,14 +83,13 @@
                             <input type="submit" value="Deslogar"/>
                         </form>    
 
-                    </div>
+                    
                     <?php
                 }else{
                     ?>
-                    <div class="deslogado">
-                        <span class="informacao">
+                    <span class="informacao">
 
-                           Você não está logado. Entre com suas informações abaixo.
+                        Você não está logado. Entre com suas informações abaixo.
 
                         </span>
                         
@@ -75,19 +98,17 @@
 
                             <span class="informacao">
                                 <span class="nome">Nome de usuário</span>
-                                <input name="usuario"/>
+                                <input class="valor" name="usuario"/>
                             </span>
 
                             <span class="informacao">
                                 <span class="nome">Senha</span>
-                                <input name="senha" type="password"/>
+                                <input class="valor" name="senha" type="password"/>
                             </span>
 
                             <input class="botao_logar" type="submit" value="Logar"/>
 
                         </form>
-
-                    </div>
 
                     <?php
                 }
@@ -97,17 +118,44 @@
         </div>
 
         <div class="tela_mensagem">
+            <?php if($_SESSION['logado']) { ?>
+
+                <div class="informacao"> Digite abaixo sua mensagem:
+
+                </div>
+
+                    <form onsubmit="return false;">
+                        <input id="msg_enviar" class="mensagem" />
+                            <input type="submit" value="Enviar"/>
+
+                        </input>
+                    </form>
+            
+                <?php } else {?>
+
+                
+                <?php } ?>               
+
+            
         </div>
 
-        <div class="tela_usuarios">
+        <div id="tela_usuarios" class="tela_usuarios">
+            <!--
+                <div class "usuario">
+                    <div class="nome">$NOME</div>
+                    <div class="login">$LOGIN</div>
+                    <div class="online">$ONLINE</div>
+                </div>
+                -->
+
         </div>
 
         <div class="tela_chat">
         </div>
-       
     
-    <script src="script_body.js"></script>    
-</body>
+    
+        <script src="script_body.js"></script>    
+    </body>
 
 </html>
 
